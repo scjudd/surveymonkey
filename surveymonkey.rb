@@ -2,6 +2,8 @@
 require 'mechanize'
 
 module SurveyMonkey
+    
+  # Class which can login to surveymonkey.com and scrape data
   class Account
     attr_reader :surveys
     
@@ -10,8 +12,8 @@ module SurveyMonkey
       login(username, password)
     end
     
+    # Get surveys matching a filter
     def get_surveys(filter = /.*/)
-      # Get surveys matching a filter
       
       # Scrape index pages
       @agent.get "http://www.surveymonkey.com/MySurveys.aspx"
@@ -44,6 +46,7 @@ module SurveyMonkey
     end
   end
   
+  # A surveymonkey.com survey
   class Survey
     attr_reader :name, :completed
     
@@ -59,6 +62,7 @@ module SurveyMonkey
       @completed = results.search('//div[@id="panTotals"]/table/tr/td[2]/b').text   # Total Completed
     end
   end
+  
 end
 
 sm = SurveyMonkey::Account.new("username", "password")
