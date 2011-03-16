@@ -5,5 +5,6 @@ sm = SurveyMonkey::Account.new("username", "password")
 surveys = sm.get_surveys
 surveys.each do |s|
   puts "--- #{s.name} ---"
+  puts "# Started:   #{s.started}"
   puts "# Completed: #{s.completed}"
 end
