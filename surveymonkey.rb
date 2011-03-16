@@ -5,9 +5,8 @@ class SurveyMonkey
   attr_reader :surveys
   
   def initialize(username, password)
-    @username, @password = username, password
     @agent = Mechanize.new
-    login
+    login(username, password)
   end
   
   def get_surveys(filter = /.*/)
@@ -28,11 +27,11 @@ class SurveyMonkey
   end
   
   private
-  def login
+  def login(username, password)
     @agent.get "http://www.surveymonkey.com/MyAccount_Login.aspx"
     @agent.page.form_with(:name => "frmLogin").tap do |login|
-      login.field_with(:name => "wc_Login1$txtUsername").value = @username
-      login.field_with(:name => "wc_Login1$txtPassword").value = @password
+      login.field_with(:name => "wc_Login1$txtUsername").value = username
+      login.field_with(:name => "wc_Login1$txtPassword").value = password
       login.add_field!("__EVENTTARGET", "wc_Login1$btnLogin")
     end.submit
   end
