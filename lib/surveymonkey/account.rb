@@ -1,8 +1,5 @@
-#!/usr/bin/env ruby
-require 'mechanize'
-
 module SurveyMonkey
-    
+  
   # Class which can login to surveymonkey.com and scrape data
   class Account
     attr_reader :surveys
@@ -45,29 +42,5 @@ module SurveyMonkey
       @agent.page.links_with(:text => filter).each { |link| @surveys << link }
     end
   end
-  
-  # A surveymonkey.com survey
-  class Survey
-    attr_reader :name, :completed
-    
-    def initialize(link)
-      @link = link
-      scrape_detail
-    end
-    
-    private
-    def scrape_detail
-      results = @link.click.link_with(:href => /_Responses.aspx/).click.link_with(:text => /view all pages/).click
-      @name = @link.text  # Name
-      @completed = results.search('//div[@id="panTotals"]/table/tr/td[2]/b').text   # Total Completed
-    end
-  end
-  
-end
 
-sm = SurveyMonkey::Account.new("username", "password")
-surveys = sm.get_surveys(/EWomen/)
-surveys.each do |s|
-  puts "--- #{s.name} ---"
-  puts "# Completed: #{s.completed}"
 end
