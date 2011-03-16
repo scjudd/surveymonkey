@@ -10,6 +10,8 @@ class SurveyMonkey
   end
   
   def get_surveys(filter = /.*/)
+    # Get surveys matching a filter
+    
     # Scrape index pages
     @agent.get "http://www.surveymonkey.com/MySurveys.aspx"
     @surveys = Array.new
