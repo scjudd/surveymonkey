@@ -6,11 +6,6 @@ module SurveyMonkey
     
     def initialize(link)
       @link = link
-      scrape_detail
-    end
-    
-    private
-    def scrape_detail
       results = @link.click.link_with(:href => /_Responses.aspx/).click.link_with(:text => /view all pages/).click
       @name = @link.text  # Name
       @started = results.search('#panTotals b')[1].text   # Total started
