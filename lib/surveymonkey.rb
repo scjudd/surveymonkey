@@ -16,4 +16,5 @@ module SurveyMonkey
   
   autoload :Account, "surveymonkey/account"
   autoload :Survey,  "surveymonkey/survey"
+  autoload :Question, "surveymonkey/question"
 end
