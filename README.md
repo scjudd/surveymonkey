@@ -1,4 +1,12 @@
-#!/usr/bin/env ruby
+surveymonky
+===========
+
+A ruby library to scrape surveys from surveymonkey.com
+
+Example
+-------
+
+```ruby
 require 'surveymonkey'
 
 sm = SurveyMonkey::Account.new("username", "password")
@@ -12,3 +20,4 @@ surveys.each do |s|
     puts "  #{i+1}: #{q.question}"
   end
 end
+```
